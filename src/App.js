@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./Home";
-import Details from "./Details"
+import Details from "./Details";
+import AboutMe from "./AboutMe";
 import detailsContext from "./deatilsContext";
 
+
 function App() {
+  // const [infoToHold, setInfoToHold] = useState(undefined)
   const [curr, setCurr] = useState('https://pokeapi.co/api/v2/pokemon?limit=9')
   const [nextPage, setnextPage] = useState('')
   const [prevPage, setprevPage] = useState('')
@@ -30,17 +33,21 @@ function App() {
       })
   }, [curr])
 
-  return (<detailsContext.Provider value={value}>
-    <div className="homepage">
-      <div className="navBar">
-        <Link to='/'><button onClick={() => setCurr('https://pokeapi.co/api/v2/pokemon?limit=9')}>GO HOME</button></Link>
+  return (
+    // Nav Bar
+    <detailsContext.Provider value={value}>
+      <div className="homepage">
+        <div className="navBar">
+          <Link to='/'><button onClick={() => setCurr('https://pokeapi.co/api/v2/pokemon?limit=9')}>GO HOME</button></Link>
+        </div>
+        <Routes>
+          <Route path='/' element={<Home pokeList={pokeList} goToNext={nextPage ? goToNext : null} goToPrev={prevPage ? goToPrev : null} />} />
+          <Route path='/details' element={<Details />} />
+          <Route path='/awesome' element={<AboutMe />} />
+        </Routes>
       </div>
-      <Routes>
-        <Route path='/' element={<Home pokeList={pokeList} goToNext={nextPage ? goToNext : null} goToPrev={prevPage ? goToPrev : null} />} />
-        <Route path='/details' element={<Details />} />
-      </Routes>
-    </div>
-  </detailsContext.Provider>);
+    </detailsContext.Provider>
+  );
 }
 
 export default App;

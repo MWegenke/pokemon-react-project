@@ -9,14 +9,12 @@ export default function Pokemon({pokeData, handleLoad}){
   const {setDetails} = useContext(detailsContext)
 
 
-
   useEffect(() => {
     fetch(pokeData.url)
     .then(res => res.json())
     .then(data => {
       setdetails(data)
-      setpokeSprite(data.sprites.other.dream_world.front_default)
-      
+      setpokeSprite(data.sprites.other.home.front_default)
     })
   }, [])
  

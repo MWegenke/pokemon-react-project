@@ -6,7 +6,9 @@ export default function Home({pokeList, goToNext, goToPrev}){
 
 
   return (<>
-    <div className="pokeList">{pokeList.map(x => <Pokemon key={x.name} pokeData={x}/>)}
-    <Pages goToNext={goToNext} goToPrev={goToPrev}/></div>
+    <div className="pokeList">
+      {pokeList.map(pokemon => <Pokemon key={pokemon.name} pokeData={pokemon}/>)}
+      <Pages goToNext={goToNext} goToPrev={goToPrev}/>
+    </div>
     </>)
 }
